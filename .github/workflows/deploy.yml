@@ -26,6 +26,16 @@ jobs:
       - name: Checkout code 🏁
         uses: actions/checkout@v3
 
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven 🏗️
+        run: ./mvnw -B --no-transfer-progress clean package -DskipTests=true --file pom.xml
+
       - name: Docker metadata ⌗🐳
         id: metadata
         uses: docker/metadata-action@v4
